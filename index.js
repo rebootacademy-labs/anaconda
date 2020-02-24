@@ -1,6 +1,5 @@
 const HEIGHT = 15;
 const WIDTH = 15;
-var score = 0;
 
 let apple = {
   x: 0,
@@ -38,24 +37,51 @@ let snake = {
   },
   move: function () {
     switch (this.direction) {
-      case 0: if (this.y > 0) { this.y-- }; break;
-      case 1: if (this.x < WIDTH - 1) { this.x++ }; break;
-      case 2: if (this.y < HEIGHT - 1) { this.y++ }; break;
-      case 3: if (this.x > 0) { this.x-- }; break;
+      case 0: // UP
+        if (this.y > 0) {
+          this.snakeTrail.push({ x: this.x, y: this.y })
+          this.snakeTrail.shift();
+          this.y--;
+        }
+        break;
+      case 1: // RIGHT
+        if (this.x < WIDTH - 1) {
+          this.snakeTrail.push({ x: this.x, y: this.y })
+          this.snakeTrail.shift();
+          this.x++
+        }
+        break;
+      case 2: // DOWN
+        if (this.y < HEIGHT - 1) {
+          this.snakeTrail.push({ x: this.x, y: this.y })
+          this.snakeTrail.shift();
+          this.y++
+        }
+        break;
+      case 3: // LEFT
+        if (this.x > 0) {
+          this.snakeTrail.push({ x: this.x, y: this.y })
+          this.snakeTrail.shift();
+          this.x--
+        }
     }
+  },
+  grow: function () {
+    this.snakeTrail.push({ x: this.x, y: this.y })
   },
   paint: function () {
     document.getElementById(`r${this.y}c${this.x}`).classList.add('snake');
-    if (snakeLength > 1) {
-      //grow tail
-    }
+    this.snakeTrail.forEach(function (tail) {
+      document.getElementById(`r${tail.y}c${tail.x}`).classList.add('snake-tail');
+    })
   }
 };
 
 let game = {
   timerId: null,
+  score: 0,
+  yourScore: document.getElementById("yourScore"),
   init: function () {
-
     let TABLE = document.getElementById("pixelCanvas")
     let grid = '';
 
@@ -74,39 +100,35 @@ let game = {
     apple.random();
     apple.paint();
   },
-  
+
   clearGrid: function () {
     for (let row = 0; row < HEIGHT; row++) {
       for (let col = 0; col < WIDTH; col++) {
         let cell = document.getElementById(`r${row}c${col}`);
         cell.classList.remove('snake')
+        cell.classList.remove('snake-tail')
       };
     };
   },
 
   play: function () {
     timerId = setInterval(function () {
-      snake.move();  
-        let yourScore = document.getElementById("yourScore");
-        let Score = 'YOUR SCORE IS: ' + score;
-        yourScore.innerText = Score;  
+      this.yourScore.innerText = `YOUR SCORE IS: ${this.score}`;
+
+      snake.move();
       if (snake.x == apple.x && snake.y == apple.y) {
-        score++;
-        snake.snakeLength++;
+        this.score++;
+        snake.grow(); // Make snake longer
         apple.clear();
         apple.random();
         apple.paint();
-        console.log(score);
       }
       game.clearGrid();
       snake.paint();
-    }, 200);
+    }.bind(this), 200);
   }
-  
+
 }
-
-
-
 
 game.init();
 game.play();

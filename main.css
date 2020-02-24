@@ -31,9 +31,12 @@ td {
 }
 
 .snake {
-  background-color: green;
+  background-color: hsl(120, 100%, 25%);
 }
 
+.snake-tail {
+  background-color: hsl(120, 100%, 70%);
+}
 .apple {
   background-color: red;
 }
@@ -41,5 +44,5 @@ td {
 #yourScore {
     font-family: Arial, Helvetica, sans-serif;
     color: rgb(10, 10, 10);
-    
+
 }
