@@ -24,6 +24,8 @@ let apple = {
 let snake = {
   x: 12,
   y: 12,
+  snakeLength: 1,
+  snakeTrail: [],
   // 0=up, 1=right; 2=down; 3=left
   direction: 0,
   changeDirection: function (event) {
@@ -44,6 +46,9 @@ let snake = {
   },
   paint: function () {
     document.getElementById(`r${this.y}c${this.x}`).classList.add('snake');
+    if (snakeLength > 1) {
+      //grow tail
+    }
   }
 };
 
@@ -78,6 +83,7 @@ let game = {
       };
     };
   },
+
   play: function () {
     timerId = setInterval(function () {
       snake.move();  
@@ -85,7 +91,8 @@ let game = {
         let Score = 'YOUR SCORE IS: ' + score;
         yourScore.innerText = Score;  
       if (snake.x == apple.x && snake.y == apple.y) {
-        score = score+1;
+        score++;
+        snake.snakeLength++;
         apple.clear();
         apple.random();
         apple.paint();
