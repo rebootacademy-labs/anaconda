@@ -1,23 +1,5 @@
-
 const HEIGHT = 15;
 const WIDTH = 15;
-const TABLE = document.getElementById("pixelCanvas");
-
-function makeGrid() {
-  let grid = '';
-
-  for (let row = 0; row < HEIGHT; row++) {
-    grid += '<tr class="row-' + row + '">';
-    // Each cell class: id RiCj; ie. R1C2
-    for (let col = 0; col < WIDTH; col++) {
-      grid += '<td class="cell" id="r' + row + 'c' + col + '"></td>';
-    };
-    grid += '</tr>';
-  };
-  TABLE.innerHTML = grid;
-};
-
-makeGrid();
 
 let apple = {
   x: 0,
@@ -32,6 +14,9 @@ let apple = {
   },
   paint: function () {
     document.getElementById(`r${this.y}c${this.x}`).classList.add('apple');
+  },
+  clear: function () {
+    document.getElementById(`r${this.y}c${this.x}`).classList.remove('apple');
   }
 }
 
@@ -61,28 +46,48 @@ let snake = {
   }
 };
 
+let game = {
+  timerId: null,
+  init: function () {
+    let TABLE = document.getElementById("pixelCanvas")
+    let grid = '';
 
-function clearGrid() {
-  for (let row = 0; row < HEIGHT; row++) {
-    for (let col = 0; col < WIDTH; col++) {
-      let cell = document.getElementById(`r${row}c${col}`);
-      cell.classList.remove('snake')
+    for (let row = 0; row < HEIGHT; row++) {
+      grid += '<tr class="row-' + row + '">';
+      // Each cell class: id RiCj; ie. R1C2
+      for (let col = 0; col < WIDTH; col++) {
+        grid += '<td class="cell" id="r' + row + 'c' + col + '"></td>';
+      };
+      grid += '</tr>';
     };
-  };
+    TABLE.innerHTML = grid;
+
+    document.getElementsByTagName('body')[0].addEventListener("keydown", snake.changeDirection.bind(snake));
+
+    apple.random();
+    apple.paint();
+  },
+  clearGrid: function () {
+    for (let row = 0; row < HEIGHT; row++) {
+      for (let col = 0; col < WIDTH; col++) {
+        let cell = document.getElementById(`r${row}c${col}`);
+        cell.classList.remove('snake')
+      };
+    };
+  },
+  play: function () {
+    timerId = setInterval(function () {
+      snake.move();
+      if (snake.x == apple.x && snake.y == apple.y) {
+        apple.clear();
+        apple.random();
+        apple.paint();
+      }
+      game.clearGrid();
+      snake.paint();
+    }, 200);
+  }
 }
 
-document.getElementsByTagName('body')[0].addEventListener("keydown", snake.changeDirection.bind(snake));
-
-var timerId;
-
-function play() {
-  timerId = setInterval(function () {
-    snake.move();
-    clearGrid();
-    snake.paint();
-  }, 200);
-}
-apple.random();
-apple.paint();
-
-play();
+game.init();
+game.play();
