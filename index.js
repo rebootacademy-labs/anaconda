@@ -3,7 +3,6 @@ const HEIGHT = 15;
 const WIDTH = 15;
 const TABLE = document.getElementById("pixelCanvas");
 
-// makeGrid function:
 function makeGrid() {
   let grid = '';
 
@@ -20,13 +19,32 @@ function makeGrid() {
 
 makeGrid();
 
-let snake = { x: 5, y: 7 };
+let snake = {
+  x: 12,
+  y: 12,
+  // 0=up, 1=right; 2=down; 3=left
+  direction: 0,
+  changeDirection: function (event) {
+    switch (event.code) {
+      case "ArrowUp": this.direction = 0; break;
+      case "ArrowDown": this.direction = 2; break;
+      case "ArrowRight": this.direction = 1; break;
+      case "ArrowLeft": this.direction = 3; break;
+    }
+  },
+  move: function () {
+    switch (this.direction) {
+      case 0: if (this.y > 0) { this.y-- }; break;
+      case 1: if (this.x < WIDTH - 1) { this.x++ }; break;
+      case 2: if (this.y < HEIGHT - 1) { this.y++ }; break;
+      case 3: if (this.x > 0) { this.x-- }; break;
+    }
+  },
+  paint: function () {
+    document.getElementById(`r${this.y}c${this.x}`).classList.add('snake');
+  }
+};
 
-function paintSnakeSquare() {
-  let pos = `r${snake.y}c${snake.x}`;
-  let cell = document.getElementById(pos);
-  cell.classList.add('snake');
-}
 
 function clearGrid() {
   for (let row = 0; row < HEIGHT; row++) {
@@ -37,21 +55,14 @@ function clearGrid() {
   };
 }
 
-document.getElementsByTagName('body')[0].addEventListener("keydown", keyDownEvent(e));
+document.getElementsByTagName('body')[0].addEventListener("keydown", snake.changeDirection.bind(snake));
 
 var timerId;
-// 0=up, 1=right; 2=down; 3=left
-var keyCode = 38;
-function move() {
-  timerId = setInterval(function keyDownEvent(e) {
-    switch (e.keyCode) {
-      case 38: snake.y--; break;
-      case 39: snake.x++; break;
-      case 40: snake.y++; break;
-      case 37: snake.x--; break;
-    }
+function play() {
+  timerId = setInterval(function () {
+    snake.move();
     clearGrid();
-    paintSnakeSquare();
-  }, 500);
+    snake.paint();
+  }, 200);
 }
-move();
+play();
