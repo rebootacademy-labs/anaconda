@@ -37,44 +37,21 @@ function clearGrid() {
   };
 }
 
+document.getElementsByTagName('body')[0].addEventListener("keydown", keyDownEvent(e));
+
 var timerId;
 // 0=up, 1=right; 2=down; 3=left
-var direction = 0;
+var keyCode = 38;
 function move() {
-  timerId = setInterval(function () {
-    switch (direction) {
-      case 0: snake.y--; break;
-      case 1: snake.x++; break;
-      case 2: snake.y++; break;
-      case 3: snake.x--; break;
+  timerId = setInterval(function keyDownEvent(e) {
+    switch (e.keyCode) {
+      case 38: snake.y--; break;
+      case 39: snake.x++; break;
+      case 40: snake.y++; break;
+      case 37: snake.x--; break;
     }
     clearGrid();
     paintSnakeSquare();
   }, 500);
 }
 move();
-
-// function moveSnake() {
-//   setInterval(function () {
-//     paintSnake();
-//     //change color of las square and eliminates it from array
-//     document.getElementById(snake[snake.length - 1]);
-//     console.log(snake[snake.length - 1]);
-//     snake[snake.length - 1].style.backgroundColor = 'rgb(149, 180, 223)';
-//     snake.pop();
-//     //puts next square in array
-//     //first find id for next square
-//     // var coordenate = String(snake[0]);
-//     // var coordenateSplit = coordenate.split('c');
-//     // var presentColumn = (coordenateSplit[1]);
-//     // var newColumn = parseInt(presentColumn) + 1;
-//     // coordenateSplit[1] = newColumn;
-//     // var str = coordenateSplit[0] + "c" + coordenateSplit[1]
-//     // newHead = str;
-//     // snake.unshift(newHead);
-//     // paintSnake()
-//     // console.log(snake)
-//   }, 500)
-// }
-
-// moveSnake()
