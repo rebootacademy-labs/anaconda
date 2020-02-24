@@ -82,7 +82,10 @@ let game = {
     timerId = setInterval(function () {
       snake.move();
       if (snake.x == apple.x && snake.y == apple.y) {
-        score = score + 1;
+        score = score++;
+          let yourScore = document.getElementById("yourScore");
+          let Score = 'your score is: ' + score;
+          yourScore.innerText = Score;  
         apple.clear();
         apple.random();
         apple.paint();
