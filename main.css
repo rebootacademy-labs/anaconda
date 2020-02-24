@@ -29,3 +29,6 @@ tr {
 td {
     width: 20px;
 }
+.snake {
+  background-color: green;
+}
