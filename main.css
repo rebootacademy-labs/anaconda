@@ -5,12 +5,27 @@
 
 h1 {
     text-align: center;
-    color: darkgreen;
+    color: rgb(68,131,219);
     font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas {
-    display: inline;
-    border: solid 10px green;
-    background: aquamarine;
+table,
+tr,
+td {
+    border: 1px solid rgb(68, 131, 219);
+    background-color: rgb(149, 180, 223);
+}
+
+table {
+    border-collapse: collapse;
+    border: 5px solid red;
+    margin: 0 auto;
+}
+
+tr {
+    height: 20px;
+}
+
+td {
+    width: 20px;
 }
