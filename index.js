@@ -80,12 +80,12 @@ let game = {
   },
   play: function () {
     timerId = setInterval(function () {
-      snake.move();
+      snake.move();  
+        let yourScore = document.getElementById("yourScore");
+        let Score = 'YOUR SCORE IS: ' + score;
+        yourScore.innerText = Score;  
       if (snake.x == apple.x && snake.y == apple.y) {
-        score = score++;
-          let yourScore = document.getElementById("yourScore");
-          let Score = 'your score is: ' + score;
-          yourScore.innerText = Score;  
+        score = score+1;
         apple.clear();
         apple.random();
         apple.paint();
