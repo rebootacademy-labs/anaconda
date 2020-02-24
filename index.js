@@ -1,5 +1,6 @@
 const HEIGHT = 15;
 const WIDTH = 15;
+var score = 0;
 
 let apple = {
   x: 0,
@@ -49,6 +50,7 @@ let snake = {
 let game = {
   timerId: null,
   init: function () {
+
     let TABLE = document.getElementById("pixelCanvas")
     let grid = '';
 
@@ -67,6 +69,7 @@ let game = {
     apple.random();
     apple.paint();
   },
+  
   clearGrid: function () {
     for (let row = 0; row < HEIGHT; row++) {
       for (let col = 0; col < WIDTH; col++) {
@@ -79,15 +82,21 @@ let game = {
     timerId = setInterval(function () {
       snake.move();
       if (snake.x == apple.x && snake.y == apple.y) {
+        score = score + 1;
         apple.clear();
         apple.random();
         apple.paint();
+        console.log(score);
       }
       game.clearGrid();
       snake.paint();
     }, 200);
   }
+  
 }
+
+
+
 
 game.init();
 game.play();
