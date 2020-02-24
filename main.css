@@ -1,33 +1,38 @@
+body {
+  background-color: black;
+}
 #container {
-    width: 100%;
-    text-align:center;
+  width: 100%;
+  text-align:center;
 }
 
 h1 {
-    text-align: center;
-    color: rgb(68,131,219);
-    font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: rgb(68,131,219);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 table,
 tr,
 td {
-    border: 1px solid rgb(68, 131, 219);
-    background-color: rgb(149, 180, 223);
+  border: 1px solid hsl(215, 68%, 56%);
+  background-color: hsl(215, 68%, 65%);
 }
 
 table {
-    border-collapse: collapse;
-    border: 5px solid red;
-    margin: 0 auto;
+  border-collapse: collapse;
+  margin: 0 auto;
+  /* -webkit-box-shadow: 10px 10px 35px 5px hsl(35, 68%, 86%);
+      -moz-box-shadow: 10px 10px 35px 5px hsl(35, 67%, 86%);
+      box-shadow: 10px 10px 35px 5px hsl(35, 68%, 86%); */
 }
 
 tr {
-    height: 20px;
+  height: 20px;
 }
 
 td {
-    width: 20px;
+  width: 20px;
 }
 
 .snake {
@@ -37,12 +42,32 @@ td {
 .snake-tail {
   background-color: hsl(120, 100%, 70%);
 }
+
 .apple {
   background-color: red;
 }
 
-#yourScore {
-    font-family: Arial, Helvetica, sans-serif;
-    color: rgb(10, 10, 10);
+#title {
+  width: 345px;
+  margin: 0 auto;
+}
 
+h1 {
+  display: inline-block;
+  width: 68%;
+  font-size: 30px;
+  text-align: left;
+}
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  width: 30%;
+  display: inline-block;
+  font-size: 15px;
+  text-align: right;
+}
+h1,h3 {
+  line-height: 30px;
+  vertical-align: middle;
 }

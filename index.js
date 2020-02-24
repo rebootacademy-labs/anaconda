@@ -81,6 +81,7 @@ let game = {
   timerId: null,
   score: 0,
   yourScore: document.getElementById("yourScore"),
+  speed: 200,
   init: function () {
     let TABLE = document.getElementById("pixelCanvas")
     let grid = '';
@@ -113,7 +114,7 @@ let game = {
 
   play: function () {
     timerId = setInterval(function () {
-      this.yourScore.innerText = `YOUR SCORE IS: ${this.score}`;
+      this.yourScore.innerText = `SCORE: ${this.score}`;
 
       snake.move();
       if (snake.x == apple.x && snake.y == apple.y) {
@@ -125,7 +126,7 @@ let game = {
       }
       game.clearGrid();
       snake.paint();
-    }.bind(this), 200);
+    }.bind(this), this.speed);
   }
 
 }
