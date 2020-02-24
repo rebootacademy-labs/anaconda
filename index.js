@@ -19,6 +19,22 @@ function makeGrid() {
 
 makeGrid();
 
+let apple = {
+  x: 0,
+  y: 0,
+  random: function () {
+    do {
+      var randomX = Math.floor(Math.random() * WIDTH);
+      var randomY = Math.floor(Math.random() * HEIGHT);
+    } while (randomX == snake.x && randomY == snake.y);
+    this.x = randomX;
+    this.y = randomY;
+  },
+  paint: function () {
+    document.getElementById(`r${this.y}c${this.x}`).classList.add('apple');
+  }
+}
+
 let snake = {
   x: 12,
   y: 12,
@@ -58,6 +74,7 @@ function clearGrid() {
 document.getElementsByTagName('body')[0].addEventListener("keydown", snake.changeDirection.bind(snake));
 
 var timerId;
+
 function play() {
   timerId = setInterval(function () {
     snake.move();
@@ -65,4 +82,7 @@ function play() {
     snake.paint();
   }, 200);
 }
+apple.random();
+apple.paint();
+
 play();
