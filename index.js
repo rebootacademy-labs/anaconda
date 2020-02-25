@@ -78,15 +78,22 @@ let snake = {
     this.snakeTrail.forEach(function (tail) {
       document.getElementById(`r${tail.y}c${tail.x}`).classList.add('snake-tail');
     })
-  }
+  },
+  resetSnake: function () {
+    this.x = 12;
+    this.y = 12;
+    this.snakeLength = 1;
+    this.snakeTrail = [];
+    this.direction = 0; 
+  },
 };
 
 let game = {
   timerId: null,
   score: 0,
   highScore: 0,
+  speed: 150,  
   yourScore: document.getElementById("yourScore"),
-  speed: 200,
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
     TABLE.innerHTML = '';
@@ -129,6 +136,7 @@ let game = {
         apple.clear();
         apple.random();
         apple.paint();
+        
       }
       game.clearGrid();
       snake.paint();
@@ -136,29 +144,23 @@ let game = {
   },
 
   endGame: function () {
-    document.getElementById(`youLose`).style.display = "inline-block";
-    document.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        document.getElementById(`youLose`).style.display = "none";
-        game.clearGrid();
-        snake.x = 15;
-        snake.y = 15;
-        snake.snakeLength = 1;
-        game.highScore = game.score;
-        game.score = 0;
-        console.log(game.highScore);
-        console.log(game.score);
-        console.log(snake.snakeLength);
-        game.init();
-      }
-    })
+    document.getElementById('youLose').style.display = "inline-block";
+    document.addEventListener('keypress', game.resetGame(e));
+    document.removeEventListener('keypress', game.resetGame(e));
   },   
-  
-   
-  
 
+  resetGame: function () {
+    if (e.key === 'Enter') {
+      game.highScore = game.score;
+      game.score = 0;
+      snake.resetSnake();
+      game.init();
+      game.play();
+    }
+  }
 }
 
 game.init();
 game.play();
+
 
