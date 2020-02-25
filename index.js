@@ -1,5 +1,5 @@
-const HEIGHT = 15;
-const WIDTH = 15;
+const HEIGHT = 25;
+const WIDTH = 25;
 
 let apple = {
   x: 0,
@@ -38,13 +38,15 @@ let snake = {
   move: function () {
     switch (this.direction) {
       case 0: // UP
-        if (this.y > 0) {
+      if (this.y <= 0) {game.endGame()}
+      if (this.y > 0) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
           this.y--;
-        }
+        };
         break;
       case 1: // RIGHT
+        if (this.x >= WIDTH - 1) {game.endGame()}
         if (this.x < WIDTH - 1) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
@@ -52,6 +54,7 @@ let snake = {
         }
         break;
       case 2: // DOWN
+        if (this.y >= HEIGHT - 1) {game.endGame()}
         if (this.y < HEIGHT - 1) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
@@ -59,6 +62,7 @@ let snake = {
         }
         break;
       case 3: // LEFT
+        if (this.x <= 0) {game.endGame()}
         if (this.x > 0) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
@@ -74,17 +78,26 @@ let snake = {
     this.snakeTrail.forEach(function (tail) {
       document.getElementById(`r${tail.y}c${tail.x}`).classList.add('snake-tail');
     })
-  }
+  },
+  resetSnake: function () {
+    this.x = 12;
+    this.y = 12;
+    this.snakeLength = 1;
+    this.snakeTrail = [];
+    this.direction = 0; 
+  },
 };
 
 let game = {
   timerId: null,
   score: 0,
+  highScore: 0,
+  speed: 150,  
   yourScore: document.getElementById("yourScore"),
-  speed: 200,
   music: new Audio('./sound/ambiente.mp3'),
   init: function () {
-    let TABLE = document.getElementById("pixelCanvas")
+    let TABLE = document.getElementById("pixelCanvas");
+    TABLE.innerHTML = '';
     let grid = '';
 
     for (let row = 0; row < HEIGHT; row++) {
@@ -117,7 +130,7 @@ let game = {
     this.music.loop = true;
     this.music.play();
     timerId = setInterval(function () {
-      this.yourScore.innerText = `SCORE: ${this.score}`;
+      this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
 
       snake.move();
       if (snake.x == apple.x && snake.y == apple.y) {
@@ -126,12 +139,28 @@ let game = {
         apple.clear();
         apple.random();
         apple.paint();
+        
       }
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
-  }
+  },
 
+  endGame: function () {
+    document.getElementById('youLose').style.display = "inline-block";
+    document.addEventListener('keypress', game.resetGame(e));
+    document.removeEventListener('keypress', game.resetGame(e));
+  },   
+
+  resetGame: function () {
+    if (e.key === 'Enter') {
+      game.highScore = game.score;
+      game.score = 0;
+      snake.resetSnake();
+      game.init();
+      game.play();
+    }
+  }
 }
 
 game.init();
