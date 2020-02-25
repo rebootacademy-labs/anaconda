@@ -1,6 +1,7 @@
 body {
   background-color: black;
 }
+
 #container {
   width: 100%;
   text-align:center;
@@ -22,9 +23,6 @@ td {
 table {
   border-collapse: collapse;
   margin: 0 auto;
-  /* -webkit-box-shadow: 10px 10px 35px 5px hsl(35, 68%, 86%);
-      -moz-box-shadow: 10px 10px 35px 5px hsl(35, 67%, 86%);
-      box-shadow: 10px 10px 35px 5px hsl(35, 68%, 86%); */
 }
 
 tr {

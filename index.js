@@ -82,6 +82,7 @@ let game = {
   score: 0,
   yourScore: document.getElementById("yourScore"),
   speed: 200,
+  music: new Audio('./sound/ambiente.mp3'),
   init: function () {
     let TABLE = document.getElementById("pixelCanvas")
     let grid = '';
@@ -113,6 +114,8 @@ let game = {
   },
 
   play: function () {
+    this.music.loop = true;
+    this.music.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}`;
 
@@ -132,5 +135,8 @@ let game = {
 }
 
 game.init();
-game.play();
-
+function start() {
+  game.play();
+  document.getElementsByTagName('body')[0].removeEventListener("keydown", start)
+}
+document.getElementsByTagName('body')[0].addEventListener("keydown",start)
