@@ -69,6 +69,7 @@ let snake = {
           this.x--
         }
     }
+
   },
   grow: function () {
     this.snakeTrail.push({ x: this.x, y: this.y })
@@ -92,7 +93,7 @@ let game = {
   timerId: null,
   score: 0,
   highScore: 0,
-  speed: 150,  
+  speed: 200,  
   yourScore: document.getElementById("yourScore"),
   music: new Audio('./sound/ambiente2.ogg'),
   init: function () {
@@ -148,14 +149,15 @@ let game = {
 
   endGame: function () {
     document.getElementById('youLose').style.display = "inline-block";
-    document.addEventListener('keypress', game.resetGame(e));
-    document.removeEventListener('keypress', game.resetGame(e));
+    document.addEventListener('keypress', game.resetGame);
   },   
 
-  resetGame: function () {
+  resetGame: function (e) {
     if (e.key === 'Enter') {
+      document.getElementById('youLose').style.display = "none";
       game.highScore = game.score;
       game.score = 0;
+      clearInterval(timerId);
       snake.resetSnake();
       game.init();
       game.play();
