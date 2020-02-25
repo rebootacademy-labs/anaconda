@@ -1,5 +1,5 @@
-const HEIGHT = 15;
-const WIDTH = 15;
+const HEIGHT = 25;
+const WIDTH = 25;
 
 let apple = {
   x: 0,
@@ -38,13 +38,15 @@ let snake = {
   move: function () {
     switch (this.direction) {
       case 0: // UP
-        if (this.y > 0) {
+      if (this.y <= 0) {game.endGame()}
+      if (this.y > 0) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
           this.y--;
-        }
+        };
         break;
       case 1: // RIGHT
+        if (this.x >= WIDTH - 1) {game.endGame()}
         if (this.x < WIDTH - 1) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
@@ -52,6 +54,7 @@ let snake = {
         }
         break;
       case 2: // DOWN
+        if (this.y >= HEIGHT - 1) {game.endGame()}
         if (this.y < HEIGHT - 1) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
@@ -59,6 +62,7 @@ let snake = {
         }
         break;
       case 3: // LEFT
+        if (this.x <= 0) {game.endGame()}
         if (this.x > 0) {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
@@ -80,10 +84,12 @@ let snake = {
 let game = {
   timerId: null,
   score: 0,
+  highScore: 0,
   yourScore: document.getElementById("yourScore"),
   speed: 200,
   init: function () {
-    let TABLE = document.getElementById("pixelCanvas")
+    let TABLE = document.getElementById("pixelCanvas");
+    TABLE.innerHTML = '';
     let grid = '';
 
     for (let row = 0; row < HEIGHT; row++) {
@@ -127,7 +133,25 @@ let game = {
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
-  }
+  },
+
+  endGame: function () {
+    document.getElementById(`youLose`).style.display = "block";
+    document.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        document.getElementById(`youLose`).style.display = "none";
+        snake.x = "15";
+        snake.y = "15";
+        snake.snakeLength = "1",
+        highScore = this.score;
+        this.score = 0;
+        game.init();
+      }
+    })
+  },   
+  
+   
+  
 
 }
 
