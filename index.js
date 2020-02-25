@@ -133,3 +133,4 @@ let game = {
 
 game.init();
 game.play();
+
