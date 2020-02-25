@@ -52,7 +52,8 @@ td {
 }
 
 .apple {
-  background-color: red;
+  background-image: url('./image/manzana1.png');
+  background-size: cover;
 }
 
 #title {
