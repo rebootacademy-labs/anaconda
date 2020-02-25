@@ -140,8 +140,7 @@ let game = {
         apple.clear();
         apple.random();
         apple.paint();
-        
-      }
+        }
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
@@ -149,6 +148,7 @@ let game = {
 
   endGame: function () {
     document.getElementById('youLose').style.display = "inline-block";
+    clearInterval(timerId);
     document.addEventListener('keypress', game.resetGame);
   },   
 
@@ -157,7 +157,6 @@ let game = {
       document.getElementById('youLose').style.display = "none";
       game.highScore = game.score;
       game.score = 0;
-      clearInterval(timerId);
       snake.resetSnake();
       game.init();
       game.play();
