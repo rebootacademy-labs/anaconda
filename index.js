@@ -120,7 +120,7 @@ let game = {
 
   play: function () {
     timerId = setInterval(function () {
-      this.yourScore.innerText = `SCORE: ${this.score}`;
+      this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
 
       snake.move();
       if (snake.x == apple.x && snake.y == apple.y) {
@@ -136,15 +136,19 @@ let game = {
   },
 
   endGame: function () {
-    document.getElementById(`youLose`).style.display = "block";
+    document.getElementById(`youLose`).style.display = "inline-block";
     document.addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         document.getElementById(`youLose`).style.display = "none";
-        snake.x = "15";
-        snake.y = "15";
-        snake.snakeLength = "1",
-        highScore = this.score;
-        this.score = 0;
+        game.clearGrid();
+        snake.x = 15;
+        snake.y = 15;
+        snake.snakeLength = 1;
+        game.highScore = game.score;
+        game.score = 0;
+        console.log(game.highScore);
+        console.log(game.score);
+        console.log(snake.snakeLength);
         game.init();
       }
     })

@@ -8,10 +8,12 @@ body {
 
 #youLose {
   width: 800px;
-  height: 800px;
+  height: 150px;
   margin: 0 auto;
   background-color: red;
   display: none;
+  color: rgb(68,131,219);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -63,7 +65,7 @@ td {
 
 h1 {
   display: inline-block;
-  width: 68%;
+  width: 61%;
   font-size: 30px;
   text-align: left;
 }
@@ -71,7 +73,7 @@ h1 {
 h3 {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  width: 30%;
+  width: 35%;
   display: inline-block;
   font-size: 15px;
   text-align: right;
