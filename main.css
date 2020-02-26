@@ -45,11 +45,13 @@ td {
 }
 
 .snake {
-  background-color: hsl(120, 100%, 25%);
+  background-image: url('./image/snakeFace.png');
+  background-size: cover;
 }
 
 .snake-tail {
-  background-color: hsl(120, 100%, 70%);
+  background-image: url('./image/cuerpo.png');
+  background-size: cover;
 }
 
 .apple {
