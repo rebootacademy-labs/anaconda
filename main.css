@@ -8,13 +8,15 @@ body {
 }
 
 #youLose {
-  width: 800px;
+  top: 45%;
+  width: 660px;
   height: 120px;
   margin: 0 auto;
   background-color: red;
   display: none;
   color: rgb(68,131,219);
   font-family: Arial, Helvetica, sans-serif;
+  padding-top: 20px;
 }
 
 table,
@@ -81,4 +83,3 @@ h3 {
   height: 70px;
   line-height: 30px;
 }
-
