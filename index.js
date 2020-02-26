@@ -17,8 +17,8 @@ let apple = {
     // avoids painting apple on top of snake
     var snakeTrail = [];
     for (var i = 0; i < snakeTrail.length; i++) {
-      if (snake.snakeTrail[i].x == this.x && snake.snakeTrail[i].y == this.y) {
-        this.random();
+      if (snake.snakeTrail[i].x == apple.x && snake.snakeTrail[i].y == apple.y) {
+        apple.random();
       }
     }
     // paints apple
@@ -145,7 +145,7 @@ let game = {
 
   play: function () {
     this.musicBackground.loop = true;
-    this.musicBackground.volume = 0.07;
+    this.musicBackground.volume = 0.04;
     this.musicBackground.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
