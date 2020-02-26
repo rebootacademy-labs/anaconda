@@ -144,19 +144,26 @@ let game = {
   play: function () {
     this.music.loop = true;
     this.music.play();
-    clearInterval(game.timerId);
-      this.speed -= 10;
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
 
       snake.move();
+      // if snake eats apple
       if (snake.x == apple.x && snake.y == apple.y) {
         this.score++;
+        
         snake.grow(); // Make snake longer
         apple.clear();
         apple.random();
         apple.paint();
-        }
+        if (this.score % 2 ===0) {
+          console.log(this.speed)
+          this.speed -=10;
+          console.log(this.speed)
+          clearInterval(timerId);
+          this.play();
+        } 
+      }
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
@@ -175,6 +182,7 @@ let game = {
         game.highScore = game.score};
       game.score = 0;
       apple.appleCounter = 0;
+      game.speed = 200;
       snake.resetSnake();
       game.init();
       game.play();
