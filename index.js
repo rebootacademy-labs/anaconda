@@ -13,7 +13,16 @@ let apple = {
     this.y = randomY;
   },
   paint: function () {
+    // avoids painting apple on top of snake
+    var snakeTrail = [];
+    for (var i = 0; i < snakeTrail.lenth; i++) {
+      if (snake.snakeTrail[i].x == this.x && snake.snakeTrail[i].y == this.y) {
+        this.random();
+      }
+    }
+    // paints apple
     document.getElementById(`r${this.y}c${this.x}`).classList.add('apple');
+
   },
   clear: function () {
     document.getElementById(`r${this.y}c${this.x}`).classList.remove('apple');
@@ -51,7 +60,7 @@ let snake = {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
           this.x++
-        }
+        };
         break;
       case 2: // DOWN
         if (this.y >= HEIGHT - 1) {game.endGame()}
@@ -59,7 +68,7 @@ let snake = {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
           this.y++
-        }
+        };
         break;
       case 3: // LEFT
         if (this.x <= 0) {game.endGame()}
@@ -67,9 +76,13 @@ let snake = {
           this.snakeTrail.push({ x: this.x, y: this.y })
           this.snakeTrail.shift();
           this.x--
-        }
-    }
-
+        };
+    };
+    for (var i = 0; i < this.snakeTrail.lenth; i++) {
+      if (this.snakeTrail[i].x == this.x && this.snakeTrail[i].y == this.y) {
+        game.endGame();
+      };
+    };
   },
   grow: function () {
     this.snakeTrail.push({ x: this.x, y: this.y })
@@ -155,7 +168,8 @@ let game = {
   resetGame: function (e) {
     if (e.key === 'Enter') {
       document.getElementById('youLose').style.display = "none";
-      game.highScore = game.score;
+      if (game.score > game.highScore) {
+        game.highScore = game.score};
       game.score = 0;
       snake.resetSnake();
       game.init();
@@ -170,4 +184,4 @@ function start() {
   document.getElementsByTagName('body')[0].removeEventListener("keydown", start)
 }
 document.getElementsByTagName('body')[0].addEventListener("keydown",start)
-// algun cambio
+
