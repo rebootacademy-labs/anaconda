@@ -1,9 +1,10 @@
-const HEIGHT = 25;
-const WIDTH = 25;
+const HEIGHT = 20;
+const WIDTH = 20;
 
 let apple = {
   x: 0,
   y: 0,
+  appleCounter: 0,
   random: function () {
     do {
       var randomX = Math.floor(Math.random() * WIDTH);
@@ -15,14 +16,14 @@ let apple = {
   paint: function () {
     // avoids painting apple on top of snake
     var snakeTrail = [];
-    for (var i = 0; i < snakeTrail.lenth; i++) {
+    for (var i = 0; i < snakeTrail.length; i++) {
       if (snake.snakeTrail[i].x == this.x && snake.snakeTrail[i].y == this.y) {
         this.random();
       }
     }
     // paints apple
     document.getElementById(`r${this.y}c${this.x}`).classList.add('apple');
-
+    this.appleCounter++;
   },
   clear: function () {
     document.getElementById(`r${this.y}c${this.x}`).classList.remove('apple');
@@ -78,7 +79,7 @@ let snake = {
           this.x--
         };
     };
-    for (var i = 0; i < this.snakeTrail.lenth; i++) {
+    for (var i = 0; i < this.snakeTrail.length; i++) {
       if (this.snakeTrail[i].x == this.x && this.snakeTrail[i].y == this.y) {
         game.endGame();
       };
@@ -108,7 +109,9 @@ let game = {
   highScore: 0,
   speed: 200,  
   yourScore: document.getElementById("yourScore"),
-  music: new Audio('./sound/ambiente2.ogg'),
+  musicBackground: new Audio('./sound/ambiente2.ogg'),
+  musicEat: new Audio('./sound/comer-manzana.mp3'),
+
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
     TABLE.innerHTML = '';
@@ -141,19 +144,28 @@ let game = {
   },
 
   play: function () {
-    this.music.loop = true;
-    this.music.play();
+    this.musicBackground.loop = true;
+    this.musicBackground.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
 
       snake.move();
+      // if snake eats apple
       if (snake.x == apple.x && snake.y == apple.y) {
         this.score++;
+        this.musicEat.play();
         snake.grow(); // Make snake longer
         apple.clear();
         apple.random();
         apple.paint();
-        }
+        if (this.score % 2 ===0) {
+          console.log(this.speed)
+          this.speed -=10;
+          console.log(this.speed)
+          clearInterval(timerId);
+          this.play();
+        } 
+      }
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
@@ -171,6 +183,8 @@ let game = {
       if (game.score > game.highScore) {
         game.highScore = game.score};
       game.score = 0;
+      apple.appleCounter = 0;
+      game.speed = 200;
       snake.resetSnake();
       game.init();
       game.play();
