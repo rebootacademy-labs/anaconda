@@ -109,7 +109,9 @@ let game = {
   highScore: 0,
   speed: 200,  
   yourScore: document.getElementById("yourScore"),
-  music: new Audio('./sound/ambiente2.ogg'),
+  musicBackground: new Audio('./sound/ambiente2.ogg'),
+  musicEat: new Audio('./sound/comer-manzana.mp3'),
+
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
     TABLE.innerHTML = '';
@@ -142,8 +144,8 @@ let game = {
   },
 
   play: function () {
-    this.music.loop = true;
-    this.music.play();
+    this.musicBackground.loop = true;
+    this.musicBackground.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
 
@@ -151,7 +153,7 @@ let game = {
       // if snake eats apple
       if (snake.x == apple.x && snake.y == apple.y) {
         this.score++;
-        
+        this.musicEat.play();
         snake.grow(); // Make snake longer
         apple.clear();
         apple.random();
