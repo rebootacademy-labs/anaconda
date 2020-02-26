@@ -110,7 +110,7 @@ let game = {
   speed: 200,  
   yourScore: document.getElementById("yourScore"),
   musicBackground: new Audio('./sound/ambiente2.ogg'),
-  musicEat: new Audio('./sound/comer-manzana.mp3'),
+  musicEat: new Audio('./sound/comer.mp3'),
   musicDead: new Audio('./sound/chocar.mp3'),
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
