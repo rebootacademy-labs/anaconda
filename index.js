@@ -1,5 +1,5 @@
-const HEIGHT = 25;
-const WIDTH = 25;
+const HEIGHT = 20;
+const WIDTH = 20;
 
 let apple = {
   x: 0,
@@ -15,7 +15,7 @@ let apple = {
   paint: function () {
     // avoids painting apple on top of snake
     var snakeTrail = [];
-    for (var i = 0; i < snakeTrail.lenth; i++) {
+    for (var i = 0; i < snakeTrail.length; i++) {
       if (snake.snakeTrail[i].x == this.x && snake.snakeTrail[i].y == this.y) {
         this.random();
       }
@@ -78,7 +78,7 @@ let snake = {
           this.x--
         };
     };
-    for (var i = 0; i < this.snakeTrail.lenth; i++) {
+    for (var i = 0; i < this.snakeTrail.length; i++) {
       if (this.snakeTrail[i].x == this.x && this.snakeTrail[i].y == this.y) {
         game.endGame();
       };
