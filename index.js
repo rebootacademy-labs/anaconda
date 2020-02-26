@@ -4,6 +4,7 @@ const WIDTH = 20;
 let apple = {
   x: 0,
   y: 0,
+  appleCounter: 0,
   random: function () {
     do {
       var randomX = Math.floor(Math.random() * WIDTH);
@@ -22,7 +23,7 @@ let apple = {
     }
     // paints apple
     document.getElementById(`r${this.y}c${this.x}`).classList.add('apple');
-
+    this.appleCounter++;
   },
   clear: function () {
     document.getElementById(`r${this.y}c${this.x}`).classList.remove('apple');
@@ -143,6 +144,8 @@ let game = {
   play: function () {
     this.music.loop = true;
     this.music.play();
+    clearInterval(game.timerId);
+      this.speed -= 10;
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
 
@@ -171,6 +174,7 @@ let game = {
       if (game.score > game.highScore) {
         game.highScore = game.score};
       game.score = 0;
+      apple.appleCounter = 0;
       snake.resetSnake();
       game.init();
       game.play();
