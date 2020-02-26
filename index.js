@@ -108,7 +108,7 @@ let game = {
   highScore: 0,
   speed: 200,  
   yourScore: document.getElementById("yourScore"),
-  music: new Audio('./sound/ambiente.mp3'),
+  music: new Audio('./sound/ambiente2.ogg'),
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
     TABLE.innerHTML = '';
