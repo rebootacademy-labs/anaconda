@@ -111,7 +111,7 @@ let game = {
   yourScore: document.getElementById("yourScore"),
   musicBackground: new Audio('./sound/ambiente2.ogg'),
   musicEat: new Audio('./sound/comer-manzana.mp3'),
-
+  musicDead: new Audio('./sound/chocar.mp3'),
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
     TABLE.innerHTML = '';
@@ -174,6 +174,8 @@ let game = {
   endGame: function () {
     document.getElementById('youLose').style.display = "inline-block";
     clearInterval(timerId);
+    this.musicDead.play();
+    this.musicDead.volume = 0.9;
     this.musicBackground.pause();
     document.addEventListener('keypress', game.resetGame);
   },   
