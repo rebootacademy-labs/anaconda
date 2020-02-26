@@ -159,9 +159,7 @@ let game = {
         apple.random();
         apple.paint();
         if (this.score % 2 ===0) {
-          console.log(this.speed)
           this.speed -=10;
-          console.log(this.speed)
           clearInterval(timerId);
           this.play();
         } 
