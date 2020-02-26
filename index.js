@@ -145,6 +145,7 @@ let game = {
 
   play: function () {
     this.musicBackground.loop = true;
+    this.musicBackground.volume = 0.07;
     this.musicBackground.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
@@ -154,6 +155,7 @@ let game = {
       if (snake.x == apple.x && snake.y == apple.y) {
         this.score++;
         this.musicEat.play();
+        this.musicEat.volume = 0.9;
         snake.grow(); // Make snake longer
         apple.clear();
         apple.random();
@@ -172,6 +174,7 @@ let game = {
   endGame: function () {
     document.getElementById('youLose').style.display = "inline-block";
     clearInterval(timerId);
+    this.musicBackground.pause();
     document.addEventListener('keypress', game.resetGame);
   },   
 
