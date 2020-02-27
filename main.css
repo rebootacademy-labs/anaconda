@@ -52,12 +52,12 @@ td {
 }
 
 .snake2 {
-  background-color: blue;
+  background-image: url('./image/snakeFace2.png');
   background-size: cover;
 }
 
 .snake2-tail {
-  background-color: blue;
+  background-image: url('./image/radiacion.png');
   background-size: cover;
 }
 
