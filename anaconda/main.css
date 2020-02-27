@@ -1,0 +1,85 @@
+body {
+  background-color: black;
+}
+
+#container {
+  width: 100%;
+  text-align:center;
+}
+
+#youLose {
+  top: 45%;
+  width: 660px;
+  height: 120px;
+  margin: 0 auto;
+  background-color: red;
+  display: none;
+  color: rgb(68,131,219);
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 20px;
+}
+
+table,
+tr,
+td {
+  border: 1px solid hsl(215, 68%, 56%);
+  background-color: hsl(215, 68%, 65%);
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+tr {
+  height: 30px;
+}
+
+td {
+  width: 30px;
+}
+
+.snake {
+  background-image: url('./image/snakeFace.png');
+  background-size: cover;
+}
+
+.snake-tail {
+  background-image: url('./image/cuerpo3.png');
+  background-size: cover;
+}
+
+.apple {
+  background-image: url('./image/manzana1.png');
+  background-size: cover;
+}
+
+#title {
+  width: 620px;
+  margin: 0 auto;
+}
+
+#logo {
+  width: 100px;
+  display: inline-block;
+}
+
+#Titulo {
+  width: 200px;
+  display: inline-block;
+  margin-left: 80px;
+  margin-right: 60px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 15px;
+  text-align: right;
+  vertical-align: top;
+  display: inline-block;
+  width: 120px;
+  height: 70px;
+  line-height: 30px;
+}
