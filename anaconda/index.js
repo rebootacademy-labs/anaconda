@@ -84,14 +84,6 @@ let snake = {
         game.endGame();
       };
     };
-    if (game.score > 4 && (this.x == 4 && this.y == 4)) 
-    {game.endGame()}
-    else if (game.score > 4 && (this.x == 4 && this.y == 15)) 
-    {game.endGame()}
-    else if (game.score > 4 && (this.x == 15 && this.y == 4)) 
-    {game.endGame()}
-    else if (game.score > 4 && (this.x == 15 && this.y == 15)) 
-    {game.endGame()}
   },
   grow: function () {
     this.snakeTrail.push({ x: this.x, y: this.y })
@@ -118,7 +110,7 @@ let game = {
   speed: 200,  
   yourScore: document.getElementById("yourScore"),
   musicBackground: new Audio('./sound/ambiente2.ogg'),
-  musicEat: new Audio('./sound/comer.mp3'),
+  musicEat: new Audio('./sound/comer-manzana.mp3'),
   musicDead: new Audio('./sound/chocar.mp3'),
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
@@ -153,7 +145,7 @@ let game = {
 
   play: function () {
     this.musicBackground.loop = true;
-    this.musicBackground.volume = 0.07;
+    this.musicBackground.volume = 0.04;
     this.musicBackground.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
@@ -169,24 +161,14 @@ let game = {
         apple.random();
         apple.paint();
         if (this.score % 2 ===0) {
-          this.speed -=15;
+          this.speed -=10;
           clearInterval(timerId);
           this.play();
-        }
-        if (this.score > 4) {
-          this.obstacle();
         } 
       }
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
-  },
-
-  obstacle: function () {
-    document.getElementById(`r4c4`).classList.add('obstacle');
-    document.getElementById(`r4c15`).classList.add('obstacle');
-    document.getElementById(`r15c4`).classList.add('obstacle');
-    document.getElementById(`r15c15`).classList.add('obstacle');
   },
 
   endGame: function () {
