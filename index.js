@@ -199,7 +199,7 @@ let game = {
   score2: 0,
   highScore: 0,
   highScore2: 0,
-  speed: 400,  
+  speed: 300,  
   yourScore: document.getElementById("yourScore"),
   yourScore2: document.getElementById("yourScore2"),
   musicBackground: new Audio('./sound/ambiente2.ogg'),
@@ -326,7 +326,7 @@ let game = {
       game.score = 0;
       game.score2 = 0;
       apple.appleCounter = 0;
-      game.speed = 400;
+      game.speed = 300;
       snake.resetSnake();
       snake2.resetSnake2();
   }
