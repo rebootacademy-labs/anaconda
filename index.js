@@ -84,6 +84,14 @@ let snake = {
         game.endGame();
       };
     };
+    if (game.score > 4 && (this.x == 4 && this.y == 4)) 
+    {game.endGame()}
+    else if (game.score > 4 && (this.x == 4 && this.y == 15)) 
+    {game.endGame()}
+    else if (game.score > 4 && (this.x == 15 && this.y == 4)) 
+    {game.endGame()}
+    else if (game.score > 4 && (this.x == 15 && this.y == 15)) 
+    {game.endGame()}
   },
   grow: function () {
     this.snakeTrail.push({ x: this.x, y: this.y })
@@ -164,11 +172,21 @@ let game = {
           this.speed -=15;
           clearInterval(timerId);
           this.play();
+        }
+        if (this.score > 4) {
+          this.obstacle();
         } 
       }
       game.clearGrid();
       snake.paint();
     }.bind(this), this.speed);
+  },
+
+  obstacle: function () {
+    document.getElementById(`r4c4`).classList.add('obstacle');
+    document.getElementById(`r4c15`).classList.add('obstacle');
+    document.getElementById(`r15c4`).classList.add('obstacle');
+    document.getElementById(`r15c15`).classList.add('obstacle');
   },
 
   endGame: function () {

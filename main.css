@@ -54,6 +54,11 @@ td {
   background-size: cover;
 }
 
+.obstacle {
+  background-color: black;
+  background-image: none;
+}
+
 #title {
   width: 620px;
   margin: 0 auto;
