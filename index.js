@@ -110,6 +110,7 @@ let snake = {
     this.direction = 0; 
   },
 };
+
 // FROM HERE DOWN SNAKE2
 let snake2 = {
   x: 5,
@@ -198,12 +199,15 @@ let game = {
   score2: 0,
   highScore: 0,
   highScore2: 0,
-  speed: 300,  
+  speed: 400,  
   yourScore: document.getElementById("yourScore"),
   yourScore2: document.getElementById("yourScore2"),
   musicBackground: new Audio('./sound/ambiente2.ogg'),
   musicEat: new Audio('./sound/comer.mp3'),
   musicDead: new Audio('./sound/chocar.mp3'),
+  started: false,
+  players: 1,
+
   init: function () {
     let TABLE = document.getElementById("pixelCanvas");
     TABLE.innerHTML = '';
@@ -243,9 +247,9 @@ let game = {
     this.musicBackground.loop = true;
     this.musicBackground.volume = 0.07;
     this.musicBackground.play();
+
     timerId = setInterval(function () {
       this.yourScore.innerText = `GREEN SCORE: ${this.score} HIGHSCORE: ${this.highScore}`;
-      this.yourScore2.innerText = `BLUE SCORE: ${this.score2} HIGHSCORE: ${this.highScore2}`;
 
       snake.move();
       // if snake eats apple
@@ -266,29 +270,34 @@ let game = {
           this.obstacle();
         } 
       }
-      
-      snake2.move();
-      // if snake2 eats apple
-      if (snake2.x == apple.x && snake2.y == apple.y) {
-        this.score2++;
-        this.musicEat.play();
-        this.musicEat.volume = 0.9;
-        snake2.grow(); // Make snake longer
-        apple.clear();
-        apple.random();
-        apple.paint();
-        if (this.score % 2 ===0) {
-          this.speed -=10;
-          clearInterval(timerId);
-          this.play();
+
+      if (this.players == 2) {
+        this.yourScore2.innerText = `BLUE SCORE: ${this.score2} HIGHSCORE: ${this.highScore2}`;
+        snake2.move();
+        // if snake2 eats apple
+        if (snake2.x == apple.x && snake2.y == apple.y) {
+          this.score2++;
+          this.musicEat.play();
+          this.musicEat.volume = 0.9;
+          snake2.grow(); // Make snake longer
+          apple.clear();
+          apple.random();
+          apple.paint();
+          if (this.score % 2 ===0) {
+            this.speed -=10;
+            clearInterval(timerId);
+            this.play();
+          }
+          if (this.score2 > 4) {
+            this.obstacle();
+          } 
         }
-        if (this.score2 > 4) {
-          this.obstacle();
-        } 
       }
       game.clearGrid();
       snake.paint();
-      snake2.paint();
+      if (this.players == 2) {
+        snake2.paint();
+      }
     }.bind(this), this.speed);
   },
 
@@ -305,32 +314,34 @@ let game = {
     this.musicDead.play();
     this.musicDead.volume = 0.9;
     this.musicBackground.pause();
-    document.addEventListener('keypress', game.resetGame);
   },   
 
-  resetGame: function (e) {
-    if (e.key === 'Enter') {
+  resetGame: function () {
       document.getElementById('youLose').style.display = "none";
       if (game.score > game.highScore) {
         game.highScore = game.score};
       if (game.score2 > game.highScore2) {
         game.highScore2 = game.score2};
+      game.players = 1;
       game.score = 0;
       game.score2 = 0;
       apple.appleCounter = 0;
-      game.speed = 200;
+      game.speed = 400;
       snake.resetSnake();
       snake2.resetSnake2();
-      game.init();
-      game.play();
-    }
   }
 }
+  game.init();
 
-game.init();
-function start() {
+document.getElementById('start1').addEventListener("click", function() {
+  game.resetGame();
+  game.init();
   game.play();
-  document.getElementsByTagName('body')[0].removeEventListener("keydown", start)
-}
-document.getElementsByTagName('body')[0].addEventListener("keydown",start)
+})
 
+document.getElementById('start2').addEventListener("click", function() {
+  game.resetGame();
+  game.players = 2;
+  game.init();
+  game.play();
+})

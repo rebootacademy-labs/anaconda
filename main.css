@@ -116,3 +116,11 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#numberOfPlayers {
+  font-family: Arial, Helvetica, sans-serif;
+  color: yellow;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+}
