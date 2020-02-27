@@ -84,13 +84,13 @@ let snake = {
         game.endGame();
       };
     };
-    if (game.score > 4 && (this.x == 4 && this.y == 4)) 
+    if (game.score > 4 && (this.x == 5 && this.y == 5)) 
     {game.endGame()}
-    else if (game.score > 4 && (this.x == 4 && this.y == 15)) 
+    else if (game.score > 4 && (this.x == 5 && this.y == 14)) 
     {game.endGame()}
-    else if (game.score > 4 && (this.x == 15 && this.y == 4)) 
+    else if (game.score > 4 && (this.x == 14 && this.y == 5)) 
     {game.endGame()}
-    else if (game.score > 4 && (this.x == 15 && this.y == 15)) 
+    else if (game.score > 4 && (this.x == 14 && this.y == 14)) 
     {game.endGame()}
   },
   grow: function () {
@@ -183,10 +183,10 @@ let game = {
   },
 
   obstacle: function () {
-    document.getElementById(`r4c4`).classList.add('obstacle');
-    document.getElementById(`r4c15`).classList.add('obstacle');
-    document.getElementById(`r15c4`).classList.add('obstacle');
-    document.getElementById(`r15c15`).classList.add('obstacle');
+    document.getElementById(`r5c5`).classList.add('obstacle');
+    document.getElementById(`r5c14`).classList.add('obstacle');
+    document.getElementById(`r14c5`).classList.add('obstacle');
+    document.getElementById(`r14c14`).classList.add('obstacle');
   },
 
   endGame: function () {
