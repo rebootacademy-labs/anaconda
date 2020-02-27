@@ -145,7 +145,7 @@ let game = {
 
   play: function () {
     this.musicBackground.loop = true;
-    this.musicBackground.volume = 0.04;
+    this.musicBackground.volume = 0.07;
     this.musicBackground.play();
     timerId = setInterval(function () {
       this.yourScore.innerText = `SCORE: ${this.score}\n HIGHSCORE: ${this.highScore}`;
