@@ -272,7 +272,7 @@ let game = {
       }
 
       if (this.players == 2) {
-        this.yourScore2.innerText = `BLUE SCORE: ${this.score2} HIGHSCORE: ${this.highScore2}`;
+        this.yourScore2.innerText = `YELLOW SCORE: ${this.score2} HIGHSCORE: ${this.highScore2}`;
         snake2.move();
         // if snake2 eats apple
         if (snake2.x == apple.x && snake2.y == apple.y) {
