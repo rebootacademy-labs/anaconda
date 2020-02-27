@@ -9,14 +9,16 @@ body {
 
 #youLose {
   top: 45%;
-  width: 660px;
+  width: 701px;
   height: 120px;
   margin: 0 auto;
-  background-color: red;
+  background-color: #abdda300;
   display: none;
-  color: rgb(68,131,219);
+  color: rgba(118, 8, 8, 0.95);
   font-family: Arial, Helvetica, sans-serif;
   padding-top: 20px;
+  background-image: url('./image/YOUL.png');
+  background-size: cover;
 }
 
 table,
