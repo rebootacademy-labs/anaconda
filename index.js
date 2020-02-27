@@ -161,7 +161,7 @@ let game = {
         apple.random();
         apple.paint();
         if (this.score % 2 ===0) {
-          this.speed -=10;
+          this.speed -=15;
           clearInterval(timerId);
           this.play();
         } 
