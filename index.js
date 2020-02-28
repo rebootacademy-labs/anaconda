@@ -257,8 +257,9 @@ let game = {
         this.score++;
         this.musicEat.play();
         this.musicEat.volume = 0.9;
+        apple.clear(); 
         snake.grow(); // Make snake longer
-        apple.clear();
+
         apple.random();
         apple.paint();
         if (this.score % 2 ===0) {
