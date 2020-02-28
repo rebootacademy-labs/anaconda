@@ -10,8 +10,8 @@ let apple = {
       var randomX = Math.floor(Math.random() * WIDTH);
       var randomY = Math.floor(Math.random() * HEIGHT);
     } while (randomX == snake.x && randomY == snake.y);
-    this.x = randomX;
-    this.y = randomY;
+      this.x = randomX;
+      this.y = randomY;
   },
   paint: function () {
     // avoids painting apple on top of snake
@@ -48,12 +48,12 @@ let snake = {
   move: function () {
     switch (this.direction) {
       case 0: // UP
-      if (this.y <= 0) {game.endGame()}
-      if (this.y > 0) {
-          this.snakeTrail.push({ x: this.x, y: this.y })
-          this.snakeTrail.shift();
-          this.y--;
-        };
+        if (this.y <= 0) {game.endGame()}
+        if (this.y > 0) {
+            this.snakeTrail.push({ x: this.x, y: this.y })
+            this.snakeTrail.shift();
+            this.y--;
+          };
         break;
       case 1: // RIGHT
         if (this.x >= WIDTH - 1) {game.endGame()}
@@ -85,13 +85,13 @@ let snake = {
       };
     };
     if (game.score > 4 && (this.x == 5 && this.y == 5)) 
-    {game.endGame()}
+      {game.endGame()}
     else if (game.score > 4 && (this.x == 5 && this.y == 14)) 
-    {game.endGame()}
+      {game.endGame()}
     else if (game.score > 4 && (this.x == 14 && this.y == 5)) 
-    {game.endGame()}
+      {game.endGame()}
     else if (game.score > 4 && (this.x == 14 && this.y == 14)) 
-    {game.endGame()}
+      {game.endGame()}
   },
   grow: function () {
     this.snakeTrail.push({ x: this.x, y: this.y })
@@ -130,8 +130,8 @@ let snake2 = {
   move: function () {
     switch (this.direction) {
       case 0: // UP
-      if (this.y <= 0) {game.endGame()}
-      if (this.y > 0) {
+        if (this.y <= 0) {game.endGame()}
+        if (this.y > 0) {
           this.snake2Trail.push({ x: this.x, y: this.y })
           this.snake2Trail.shift();
           this.y--;
@@ -167,13 +167,13 @@ let snake2 = {
       };
     };
     if (game.score > 4 && (this.x == 5 && this.y == 5)) 
-    {game.endGame()}
+      {game.endGame()}
     else if (game.score > 4 && (this.x == 5 && this.y == 14)) 
-    {game.endGame()}
+      {game.endGame()}
     else if (game.score > 4 && (this.x == 14 && this.y == 5)) 
-    {game.endGame()}
+      {game.endGame()}
     else if (game.score > 4 && (this.x == 14 && this.y == 14)) 
-    {game.endGame()}
+      {game.endGame()}
   },
   grow: function () {
     this.snake2Trail.push({ x: this.x, y: this.y })

@@ -1,10 +1,61 @@
-body {
+body{
   background-color: black;
+  background-image: url('./image/fondo2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #container {
   width: 100%;
   text-align:center;
+}
+
+#title {
+  width: 620px;
+  margin: 0 auto;
+}
+
+#logo {
+  width: 100px;
+  display: inline-block;
+  margin-left: 0px;
+  margin-right: 16px;
+}
+
+#Titulo {
+  width: 252px;
+  display: inline-block;
+  margin-left: 49px;
+  margin-right: 26px;
+  margin-bottom: 30px;
+}
+
+#scoreboard {
+  background-image: url('./image/scoreL.jpg');
+  background-size: cover;
+  border: #4a5b44 5px solid;
+  width: 140px;
+  height: 90px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#yourScore, #yourScore2 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #3bd154;
+  font-weight: bold;
+  font-size: 12px;
+  vertical-align: center;
+  height: 25px;
+  width: 130px;
+}
+
+#ONE{
+  height: 25px;
+}
+
+#TWO{
+  height: 25px;
 }
 
 #youLose {
@@ -71,57 +122,5 @@ td {
   background-size: cover;
 }
 
-#title {
-  width: 620px;
-  margin: 0 auto;
-}
 
-#logo {
-  width: 100px;
-  display: inline-block;
-  margin-left: 0px;
-  margin-right: 16px;
-}
-
-#Titulo {
-  width: 252px;
-  display: inline-block;
-  margin-left: 49px;
-  margin-right: 26px;
-  margin-bottom: 30px;
-}
-
-#scoreboard {
-  background-image: url('./image/scoreL.jpg');
-  background-size: cover;
-  border: #4a5b44 5px solid;
-  width: 140px;
-  height: 90px;
-  display: inline-block;
-  vertical-align: top;
-}
-
-#yourScore, #yourScore2 {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #3bd154;
-  font-weight: bold;
-  font-size: 12px;
-  vertical-align: center;
-  height: 25px;
-  width: 130px;
-}
-
-body{
-  background-image: url('./image/fondo2.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#ONE{
-  height: 25px;
-}
-
-#TWO{
-  height: 25px;
-}
 
